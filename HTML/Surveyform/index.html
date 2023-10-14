@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    
+</head>
+<body>
+    <div class="box">
+    <h1>Customer Survey Form</h1>
+    
+    <form id="surveyForm">
+        <div class="container">
+        <div class="L-container">
+            <div class="inp-f">
+        <label for="firstName">First Name:</label>
+    
+        <input type="text" id="firstName" required>
+    </div>
+    <div class="inp-f">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required>
+    </div>
+    <div class="inp-f">
+        <label>Gender:</label>
+        <br>
+        <input type="checkbox" id="male" name="gender" value="Male"> Male
+        <input type="checkbox" id="female" name="gender" value="Female"> Female
+        <input type="checkbox" id="other" name="gender" value="Other"> Other
+        <br>
+    </div>
+
+    <div class="inp-f">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+        </div>
+        
+        
+    </div>
+
+        <div class="R-container">
+            <div class="inp-f">
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" required>
+        </div>
+        <div class="inp-f">
+        <label for="country">Country:</label>
+        <select id="country" required>
+            <option value="India">India</option>
+            <option value="USA">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="Italy">Italy</option>
+            <option value="Australia">Australia</option>
+            
+        </select>
+    </div>
+    <div class="inp-f">
+
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" required>
+    </div>
+    <div class="inp-f">
+
+        <label for="mobileNumber">Mobile Number:</label>
+        <input type="tel" id="mobileNumber" required>
+    </div>
+    </div>
+</div>
+
+
+        <div class="btn">
+        <button type="button" onclick="submitForm()">Submit</button>
+        <button type="button" onclick="resetForm()">Reset</button>
+    </div>
+    </form>
+
+    <div id="popup" class="hidden">
+        <div class="popup-content">
+            <h2>Submitted Information</h2>
+            <p><strong>First Name:</strong> <span id="popupFirstName"></span></p>
+            <p><strong>Last Name:</strong> <span id="popupLastName"></span></p>
+            <p><strong>Date of Birth:</strong> <span id="popupDob"></span></p>
+            <p><strong>Country:</strong> <span id="popupCountry"></span></p>
+            <p><strong>Gender:</strong> <span id="popupGender"></span></p>
+            <p><strong>Profession:</strong> <span id="popupProfession"></span></p>
+            <p><strong>Email:</strong> <span id="popupEmail"></span></p>
+            <p><strong>Mobile Number:</strong> <span id="popupMobileNumber"></span></p>
+            <button type="button" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+</div>
+
+<style>
+   
+ html, body {
+    margin: 0;
+    padding: 0;
+    
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #3a8ce4;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    align-content: center;
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+h1 {
+    background-color: #3a8ce4;
+    color: #fff;
+    padding: 5px;
+}
+
+form {
+    max-width: 700px;
+    /* margin: 0 auto; */
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+label {
+    
+    padding: 10px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+select {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    flex: 1;
+}
+
+input[type="checkbox"] {
+    margin: 15px;
+}
+
+
+button {
+    background-color: #3a8ce4;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+   
+}
+.btn{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+#popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.popup-content {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    
+}
+.L-container{
+    display: block;
+    max-width: 50%;
+    text-align: left;
+    justify-content: space-around;
+    
+
+}
+.R-container{
+    display: block;
+    max-width: 50%;
+    text-align: left;
+    justify-content: space-around;
+    
+}
+.inp-f{
+    margin-bottom: 30px;
+}
+.box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+</style>
+
+
+
+
+<script>
+    function submitForm() {
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var dob = document.getElementById("dob").value;
+    var country = document.getElementById("country").value;
+    var genderElements = document.getElementsByName("gender");
+    var gender = "";
+    for (var i = 0; i < genderElements.length; i++) {
+        if (genderElements[i].checked) {
+            gender = genderElements[i].value;
+        }
+    }
+    var profession = document.getElementById("profession").value;
+    var email = document.getElementById("email").value;
+    var mobileNumber = document.getElementById("mobileNumber").value;
+
+    if (firstName && lastName && dob && country && gender && profession && email && mobileNumber) {
+        document.getElementById("popupFirstName").textContent = firstName;
+        document.getElementById("popupLastName").textContent = lastName;
+        document.getElementById("popupDob").textContent = dob;
+        document.getElementById("popupCountry").textContent = country;
+        document.getElementById("popupGender").textContent = gender;
+        document.getElementById("popupProfession").textContent = profession;
+        document.getElementById("popupEmail").textContent = email;
+        document.getElementById("popupMobileNumber").textContent = mobileNumber;
+        document.getElementById("popup").style.display = "block";
+    } else {
+        alert("Please fill out all required fields.");
+    }
+}
+
+function resetForm() {
+    document.getElementById("surveyForm").reset();
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    resetForm();
+}
+
+</script>
+</body>
+</html>
